@@ -17,7 +17,7 @@ def main():
     brisbane_section_id = 132
     sydney_section_id = "133"
     melbourne_section_id = 134
-    #assessment_id = "587"
+    assessment_id = "587"
     get_students_in_section("Sydney")
     #get_rubric_marks(sydney_section_id, assessment_id)
 
