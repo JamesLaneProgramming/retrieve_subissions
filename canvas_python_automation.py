@@ -17,9 +17,9 @@ def main():
     brisbane_section_id = 132
     sydney_section_id = "133"
     melbourne_section_id = 134
-    assessment_id = "587"
+    #assessment_id = "587"
     get_students_in_section("Sydney")
-    get_rubric_marks(sydney_section_id, assessment_id)
+    #get_rubric_marks(sydney_section_id, assessment_id)
 
 
 def get_students_in_section(section_name):
@@ -44,7 +44,7 @@ def get_students_in_section(section_name):
     payload = {'per_page':pagination_level, 
                'include[]': 'students'
               }
-    headers = {}
+    headers = {'Authorization' : 'Bearer 9870~cAQTi5JVvkzGKhjEINhrihqdOF6DiJk7b4V6sNNou8xad3gnkExsZaqEzNf4dJ1A'}
     print("Requesting {0} endpoint".format(domain + API_request))
     response = requests.get(
                             domain + API_request,
@@ -62,7 +62,7 @@ def get_students_in_section(section_name):
         if section['name'] == section_name:
             #student is a dictionary of student data.
             for enrolled_student in section['students']:
-                print(enrolled_student['id'])
+                print(enrolled_student['name'])
                 students.append(student(enrolled_student['id']))
     print("Found {0} students in section: {1}".format(len(students),
                                                       section_name))
