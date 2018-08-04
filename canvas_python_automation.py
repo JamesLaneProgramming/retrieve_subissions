@@ -8,6 +8,7 @@
 #End of Google OAuth imports
 
 import sys
+import argparse
 import requests
 import json
 
@@ -19,8 +20,14 @@ def main():
     melbourne_section_id = 134
     assessment_id = "587"
     get_students_in_section("Sydney")
-    #get_rubric_marks(sydney_section_id, assessment_id)
-
+    students = list()
+    print("End of Sydney")
+    get_students_in_section("Brisbane")
+    students = list()
+    print("End of Brisbane")
+    get_students_in_section("Melbourne")
+    students = list()
+    get_rubric_marks(sydney_section_id, assessment_id)
 
 def get_students_in_section(section_name):
     '''
