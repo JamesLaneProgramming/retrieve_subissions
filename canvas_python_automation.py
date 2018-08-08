@@ -8,28 +8,43 @@
 #End of Google OAuth imports
 
 import sys
+import argparse
 import requests
 import json
 
 students = list()
 
+#Command Line Argument Handing
+parser = argparse.ArgumentParser()
+subparsers = parser.add_subparsers(help='subparsers')
+
+#Create subparsers for different options.
+assessment_parser = subparsers.add_parser('a', help='Retrieves assessment')
+student_parser = subparsers.add_parser('s', help='Retrieves student')
+assessment_parser.add_argument('-s', '--section',
+                        type=int,
+                        help='Returns all students within the given section')
+#Assessment argument with rubric as child.
+#parser.add_argument('-r', '--rubric')
+parser.add_argument('-o', '--output', help='Output file', default="stdout")
+parser.add_argument('-v', '--verbose', action='store_true', 
+                        help='Displays verbose output(default is stdout)')
+args = parser.parse_args()
+
 def main():
-    brisbane_section_id = 132
-    sydney_section_id = "133"
-    melbourne_section_id = 134
-    assessment_id = "587"
-    get_students_in_section("Sydney")
+    if(args.section):
+        get_students_in_section(args.section)
+    #Reset list
     #get_rubric_marks(sydney_section_id, assessment_id)
 
-
-def get_students_in_section(section_name):
+def get_students_in_section(section_id):
     '''
     This is a docstring
 
     Arguments
     ---------
-    section_name(String):
-        section_name is used to filter the students by section
+    section_id(int):
+        section_id is used to filter the students by section
     
     Returns
     -------
@@ -59,13 +74,13 @@ def get_students_in_section(section_name):
     #Contains a field for students
     for section in response:
         #filters the sections by name
-        if section['name'] == section_name:
+        if section['id'] == section_id:
             #student is a dictionary of student data.
             for enrolled_student in section['students']:
                 print(enrolled_student['name'])
                 students.append(student(enrolled_student['id']))
     print("Found {0} students in section: {1}".format(len(students),
-                                                      section_name))
+                                                      section_id))
     return students
 
 def get_rubric_marks(section_id, assessment_id):
