@@ -59,7 +59,7 @@ def get_students_in_section(section_id):
     payload = {'per_page':pagination_level, 
                'include[]': 'students'
               }
-    headers = {'Authorization' : 'Bearer 9870~cAQTi5JVvkzGKhjEINhrihqdOF6DiJk7b4V6sNNou8xad3gnkExsZaqEzNf4dJ1A'}
+    headers = {'Authorization' : 'Bearer {Enter bearer here}'}
     print("Requesting {0} endpoint".format(domain + API_request))
     response = requests.get(
                             domain + API_request,
